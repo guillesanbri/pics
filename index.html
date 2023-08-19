@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<div class="posts">
+  {% for post in site.posts %}
+          <article class="post">
+            <a href="{{ site.baseurl }}{{ post.url }}">
+            <div class="pics-card-container">
+                <img style="width:100%" src="images/{{post.thumbnail}}" alt="Index photo">
+              <h1 class="bottom-left-text">
+                <a class="static" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+              </h1>
+            </div>
+            </a>
+          </article>
+  {% endfor %}
+</div>

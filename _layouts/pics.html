@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+<article class="post">
+
+  <hr><hr>
+
+  <h1 class="album-h1">{{ page.title }}</h1>
+
+  <div style="text-align: right;">
+  {{ content }}
+  </div>
+
+  <hr><hr>
+
+  <div class="image-container" id="image-container"></div>
+
+  <script>
+    // Replace with your GCP bucket URL
+    const imageContainer = document.getElementById('image-container');
+    const bucketUrl = `https://storage.googleapis.com/gsb-pics/`;
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+
+    // Fetch the list of objects (images) in the bucket
+    fetch(bucketUrl)
+      .then(response => response.text())
+        .then(data => {
+          // Parse the XML or HTML response to extract image URLs
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(data, 'text/xml');
+          const imageUrls = Array.from(xmlDoc.getElementsByTagName('Contents')).map(content => {
+            return bucketUrl + content.getElementsByTagName('Key')[0].textContent;
+          });
+
+      // Filter out image URLs based on imageExtensions and desired directory
+      const imageUrlsFiltered = imageUrls.filter(url => {
+        const extension = url.substring(url.lastIndexOf('.')).toLowerCase();
+        return imageExtensions.includes(extension) && url.includes(`{{ page.bucket-dir }}`);
+      });
+
+        // Create image elements and append to the container
+        imageUrlsFiltered.forEach(url => {
+          const img = document.createElement('img');
+          img.src = url;
+          img.style.width = '100%';
+          imageContainer.appendChild(img);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching images:', error);
+      });
+  </script>
+
+</article>
