@@ -117,47 +117,18 @@
         }
 
         .qr-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: contain;
-        }
-
-        .qr-overlay {
-            position: absolute;
-            top: 0;
-            background: #333;
-            transition: all 0.5s ease;
-        }
-
-        .qr-overlay-1 {
-            left: 0;
-            width: 50%;
-            height: 50%;
-        }
-
-        .qr-overlay-2 {
-            right: 0;
-            width: 50%;
-            height: 50%;
-        }
-
-        .qr-overlay-3 {
-            left: 0;
-            bottom: 0;
-            width: 50%;
-            height: 50%;
-        }
-
-        .qr-overlay-4 {
-            right: 0;
-            bottom: 0;
-            width: 50%;
-            height: 50%;
-        }
-
-        .qr-overlay.revealed {
             opacity: 0;
-            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .qr-image.visible {
+            opacity: 1;
         }
 
         .progress-text {
@@ -342,11 +313,11 @@
         <div class="qr-container">
             <div class="qr-title">Your QR Code</div>
             <div class="qr-wrapper">
-                <img src="images/qr-code.png" alt="QR Code" class="qr-image">
-                <div class="qr-overlay qr-overlay-1" data-section="1"></div>
-                <div class="qr-overlay qr-overlay-2" data-section="2"></div>
-                <div class="qr-overlay qr-overlay-3" data-section="3"></div>
-                <div class="qr-overlay qr-overlay-4" data-section="4"></div>
+                <img src="images/qr_0.png" alt="QR Code - 0 solved" class="qr-image visible" data-qr="0">
+                <img src="images/qr_1.png" alt="QR Code - 1 solved" class="qr-image" data-qr="1">
+                <img src="images/qr_2.png" alt="QR Code - 2 solved" class="qr-image" data-qr="2">
+                <img src="images/qr_3.png" alt="QR Code - 3 solved" class="qr-image" data-qr="3">
+                <img src="images/qr_4.png" alt="QR Code - 4 solved" class="qr-image" data-qr="4">
             </div>
             <div class="progress-text">Progress: <span id="progress">0</span>/4 riddles solved</div>
         </div>
@@ -414,7 +385,6 @@
             for (let i = 1; i <= 4; i++) {
                 if (getCookie('riddle' + i) === 'solved') {
                     markAsSolved(i);
-                    revealQRSection(i);
                 }
             }
             updateProgress();
@@ -455,9 +425,8 @@
                 // Store in cookie
                 setCookie('riddle' + currentRiddle, 'solved');
 
-                // Mark as solved and reveal QR section
+                // Mark as solved and update progress
                 markAsSolved(currentRiddle);
-                revealQRSection(currentRiddle);
                 updateProgress();
 
                 // Close modal after a short delay
@@ -477,10 +446,26 @@
             card.querySelector('.riddle-status').textContent = '✓ Solved!';
         }
 
-        // Reveal QR code section
-        function revealQRSection(riddleNum) {
-            const overlay = document.querySelector(`.qr-overlay[data-section="${riddleNum}"]`);
-            overlay.classList.add('revealed');
+        // Update QR image based on progress
+        function updateQRImage() {
+            // Count solved riddles
+            let solved = 0;
+            for (let i = 1; i <= 4; i++) {
+                if (getCookie('riddle' + i) === 'solved') {
+                    solved++;
+                }
+            }
+
+            // Hide all QR images
+            document.querySelectorAll('.qr-image').forEach(img => {
+                img.classList.remove('visible');
+            });
+
+            // Show the appropriate QR image (0 to 4)
+            const qrImage = document.querySelector(`.qr-image[data-qr="${solved}"]`);
+            if (qrImage) {
+                qrImage.classList.add('visible');
+            }
         }
 
         // Update progress counter
@@ -492,6 +477,7 @@
                 }
             }
             document.getElementById('progress').textContent = solved;
+            updateQRImage();
         }
 
         // Allow Enter key to submit
