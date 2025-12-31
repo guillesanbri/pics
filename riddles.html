@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mystery Riddles</title>
+    <title>...?</title>
     <style>
         * {
             margin: 0;
@@ -248,11 +248,11 @@
     <div class="container">
         <div class="qr-container">
             <div class="qr-wrapper">
-                <img src="images/qr_0.png" alt="QR Code - 0 solved" class="qr-image visible" data-qr="0">
-                <img src="images/qr_1.png" alt="QR Code - 1 solved" class="qr-image" data-qr="1">
-                <img src="images/qr_2.png" alt="QR Code - 2 solved" class="qr-image" data-qr="2">
-                <img src="images/qr_3.png" alt="QR Code - 3 solved" class="qr-image" data-qr="3">
-                <img src="images/qr_4.png" alt="QR Code - 4 solved" class="qr-image" data-qr="4">
+                <img src="images/qr_0.png" alt="Código QR - 0 resueltos" class="qr-image visible" data-qr="0">
+                <img src="images/qr_1.png" alt="Código QR - 1 resuelto" class="qr-image" data-qr="1">
+                <img src="images/qr_2.png" alt="Código QR - 2 resueltos" class="qr-image" data-qr="2">
+                <img src="images/qr_3.png" alt="Código QR - 3 resueltos" class="qr-image" data-qr="3">
+                <img src="images/qr_4.png" alt="Código QR - 4 resueltos" class="qr-image" data-qr="4">
             </div>
             <div class="progress-text"><span id="progress">0</span>/4</div>
         </div>
@@ -279,12 +279,12 @@
     <!-- Modal -->
     <div class="modal" id="riddleModal">
         <div class="modal-content">
-            <div class="modal-header" id="modalHeader">Riddle #1</div>
+            <div class="modal-header" id="modalHeader">Acertijo #1</div>
             <div class="riddle-text" id="riddleText"></div>
-            <input type="text" class="answer-input" id="answerInput" placeholder="Type your answer here...">
+            <input type="text" class="answer-input" id="answerInput" placeholder="Escribe tu respuesta aquí...">
             <div class="button-group">
-                <button class="btn btn-submit" onclick="checkAnswer()">Submit Answer</button>
-                <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-submit" onclick="checkAnswer()">Enviar</button>
+                <button class="btn btn-cancel" onclick="closeModal()">Cancelar</button>
             </div>
             <div class="feedback" id="feedback"></div>
         </div>
@@ -294,20 +294,20 @@
         // Riddles and their answers (case-insensitive)
         const riddles = {
             1: {
-                text: "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
-                answers: ["echo", "an echo"]
+                text: "Hablo sin boca y oigo sin orejas. No tengo cuerpo, pero cobro vida con el viento. ¿Qué soy?",
+                answers: ["eco", "el eco"]
             },
             2: {
-                text: "The more you take, the more you leave behind. What am I?",
-                answers: ["footsteps", "steps", "footprints"]
+                text: "Cuanto más tomas, más dejas atrás. ¿Qué soy?",
+                answers: ["pasos", "huellas", "pisadas"]
             },
             3: {
-                text: "I have keys but no locks. I have space but no room. You can enter but can't go outside. What am I?",
-                answers: ["keyboard", "a keyboard"]
+                text: "Tengo teclas pero no cerraduras. Tengo espacio pero no habitación. Puedes entrar pero no salir. ¿Qué soy?",
+                answers: ["teclado", "el teclado"]
             },
             4: {
-                text: "What has hands but cannot clap?",
-                answers: ["clock", "a clock", "watch", "a watch"]
+                text: "¿Qué tiene manos pero no puede aplaudir?",
+                answers: ["reloj", "el reloj", "un reloj"]
             }
         };
 
@@ -351,7 +351,7 @@
             }
 
             currentRiddle = riddleNum;
-            document.getElementById('modalHeader').textContent = 'Riddle #' + riddleNum;
+            document.getElementById('modalHeader').textContent = 'Acertijo #' + riddleNum;
             document.getElementById('riddleText').textContent = riddles[riddleNum].text;
             document.getElementById('answerInput').value = '';
             document.getElementById('feedback').className = 'feedback';
@@ -372,7 +372,7 @@
             const feedback = document.getElementById('feedback');
 
             if (correctAnswers.includes(userAnswer)) {
-                feedback.textContent = '🎉 Correct! Well done!';
+                feedback.textContent = '🎉 Correcto! Muy bienn!';
                 feedback.className = 'feedback success';
 
                 // Store in cookie
@@ -387,7 +387,7 @@
                     closeModal();
                 }, 1500);
             } else {
-                feedback.textContent = '❌ Not quite right. Try again!';
+                feedback.textContent = '❌ Nop, intentalo otra vez!';
                 feedback.className = 'feedback error';
             }
         }
