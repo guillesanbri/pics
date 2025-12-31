@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f5f5dc 0%, #e8dcc4 100%);
             min-height: 100vh;
             padding: 20px;
             display: flex;
@@ -36,10 +36,10 @@
         }
 
         .riddle-card {
-            background: white;
+            background: #faf8f3;
             border-radius: 15px;
             padding: 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             aspect-ratio: 1;
@@ -50,29 +50,29 @@
 
         .riddle-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .riddle-card.solved {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #8b1a1a 0%, #5c0f0f 100%);
+            color: #faf8f3;
         }
 
         .riddle-number {
             font-size: 4em;
             font-weight: bold;
-            color: #667eea;
+            color: #8b1a1a;
         }
 
         .riddle-card.solved .riddle-number {
-            color: white;
+            color: #faf8f3;
         }
 
         .qr-container {
-            background: white;
+            background: #faf8f3;
             border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
             margin-bottom: 30px;
         }
@@ -83,7 +83,7 @@
             max-width: 300px;
             height: 300px;
             margin: 0 auto;
-            background: #f0f0f0;
+            background: #f5f0e8;
             border-radius: 10px;
         }
 
@@ -105,7 +105,7 @@
         .progress-text {
             margin-top: 15px;
             font-size: 0.9em;
-            color: #667eea;
+            color: #8b1a1a;
             font-weight: 600;
         }
 
@@ -128,12 +128,12 @@
         }
 
         .modal-content {
-            background: white;
+            background: #faf8f3;
             border-radius: 20px;
             padding: 40px;
             max-width: 500px;
             width: 90%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: slideIn 0.3s ease;
         }
 
@@ -151,7 +151,7 @@
         .modal-header {
             font-size: 1.8em;
             margin-bottom: 20px;
-            color: #667eea;
+            color: #8b1a1a;
             font-weight: 600;
         }
 
@@ -159,7 +159,7 @@
             font-size: 1.2em;
             margin-bottom: 25px;
             line-height: 1.6;
-            color: #333;
+            color: #4a4a4a;
             font-style: italic;
         }
 
@@ -167,15 +167,16 @@
             width: 100%;
             padding: 15px;
             font-size: 1.1em;
-            border: 2px solid #ddd;
+            border: 2px solid #e8dcc4;
             border-radius: 10px;
             margin-bottom: 20px;
             transition: border-color 0.3s ease;
+            background: #ffffff;
         }
 
         .answer-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #8b1a1a;
         }
 
         .button-group {
@@ -195,22 +196,22 @@
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #8b1a1a 0%, #5c0f0f 100%);
+            color: #faf8f3;
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 15px rgba(139, 26, 26, 0.4);
         }
 
         .btn-cancel {
-            background: #f0f0f0;
-            color: #333;
+            background: #e8dcc4;
+            color: #4a4a4a;
         }
 
         .btn-cancel:hover {
-            background: #e0e0e0;
+            background: #dccfb3;
         }
 
         .feedback {
@@ -223,14 +224,14 @@
         }
 
         .feedback.success {
-            background: #d4edda;
-            color: #155724;
+            background: #e8dcc4;
+            color: #5c0f0f;
             display: block;
         }
 
         .feedback.error {
-            background: #f8d7da;
-            color: #721c24;
+            background: #f5e6e6;
+            color: #8b1a1a;
             display: block;
         }
 
