@@ -19,43 +19,33 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 500px;
             width: 100%;
-        }
-
-        h1 {
-            text-align: center;
-            color: white;
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255,255,255,0.9);
-            font-size: 1.2em;
-            margin-bottom: 40px;
+            margin-top: 20px;
         }
 
         .riddles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
         .riddle-card {
             background: white;
             border-radius: 15px;
-            padding: 25px;
+            padding: 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .riddle-card:hover {
@@ -69,47 +59,28 @@
         }
 
         .riddle-number {
-            font-size: 2.5em;
+            font-size: 4em;
             font-weight: bold;
             color: #667eea;
-            margin-bottom: 10px;
         }
 
         .riddle-card.solved .riddle-number {
             color: white;
         }
 
-        .riddle-title {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .riddle-status {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
         .qr-container {
             background: white;
             border-radius: 15px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .qr-title {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            color: #667eea;
-            font-weight: 600;
+            margin-bottom: 30px;
         }
 
         .qr-wrapper {
             position: relative;
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             height: 300px;
             margin: 0 auto;
             background: #f0f0f0;
@@ -132,8 +103,8 @@
         }
 
         .progress-text {
-            margin-top: 20px;
-            font-size: 1.1em;
+            margin-top: 15px;
+            font-size: 0.9em;
             color: #667eea;
             font-weight: 600;
         }
@@ -263,17 +234,12 @@
             display: block;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .riddles-grid {
-                grid-template-columns: 1fr;
+        @media (max-width: 400px) {
+            .riddle-number {
+                font-size: 3em;
             }
 
             .qr-wrapper {
-                width: 250px;
                 height: 250px;
             }
         }
@@ -281,37 +247,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🧩 Mystery Riddles</h1>
-        <p class="subtitle">Solve all four riddles to reveal the hidden QR code!</p>
-
-        <div class="riddles-grid">
-            <div class="riddle-card" data-riddle="1" onclick="openRiddle(1)">
-                <div class="riddle-number">1</div>
-                <div class="riddle-title">First Riddle</div>
-                <div class="riddle-status">Click to solve</div>
-            </div>
-
-            <div class="riddle-card" data-riddle="2" onclick="openRiddle(2)">
-                <div class="riddle-number">2</div>
-                <div class="riddle-title">Second Riddle</div>
-                <div class="riddle-status">Click to solve</div>
-            </div>
-
-            <div class="riddle-card" data-riddle="3" onclick="openRiddle(3)">
-                <div class="riddle-number">3</div>
-                <div class="riddle-title">Third Riddle</div>
-                <div class="riddle-status">Click to solve</div>
-            </div>
-
-            <div class="riddle-card" data-riddle="4" onclick="openRiddle(4)">
-                <div class="riddle-number">4</div>
-                <div class="riddle-title">Fourth Riddle</div>
-                <div class="riddle-status">Click to solve</div>
-            </div>
-        </div>
-
         <div class="qr-container">
-            <div class="qr-title">Your QR Code</div>
             <div class="qr-wrapper">
                 <img src="images/qr_0.png" alt="QR Code - 0 solved" class="qr-image visible" data-qr="0">
                 <img src="images/qr_1.png" alt="QR Code - 1 solved" class="qr-image" data-qr="1">
@@ -319,7 +255,25 @@
                 <img src="images/qr_3.png" alt="QR Code - 3 solved" class="qr-image" data-qr="3">
                 <img src="images/qr_4.png" alt="QR Code - 4 solved" class="qr-image" data-qr="4">
             </div>
-            <div class="progress-text">Progress: <span id="progress">0</span>/4 riddles solved</div>
+            <div class="progress-text"><span id="progress">0</span>/4</div>
+        </div>
+
+        <div class="riddles-grid">
+            <div class="riddle-card" data-riddle="1" onclick="openRiddle(1)">
+                <div class="riddle-number">1</div>
+            </div>
+
+            <div class="riddle-card" data-riddle="2" onclick="openRiddle(2)">
+                <div class="riddle-number">2</div>
+            </div>
+
+            <div class="riddle-card" data-riddle="3" onclick="openRiddle(3)">
+                <div class="riddle-number">3</div>
+            </div>
+
+            <div class="riddle-card" data-riddle="4" onclick="openRiddle(4)">
+                <div class="riddle-number">4</div>
+            </div>
         </div>
     </div>
 
@@ -342,19 +296,19 @@
         const riddles = {
             1: {
                 text: "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
-                answer: "echo"
+                answers: ["echo", "an echo"]
             },
             2: {
                 text: "The more you take, the more you leave behind. What am I?",
-                answer: "footsteps"
+                answers: ["footsteps", "steps", "footprints"]
             },
             3: {
                 text: "I have keys but no locks. I have space but no room. You can enter but can't go outside. What am I?",
-                answer: "keyboard"
+                answers: ["keyboard", "a keyboard"]
             },
             4: {
                 text: "What has hands but cannot clap?",
-                answer: "clock"
+                answers: ["clock", "a clock", "watch", "a watch"]
             }
         };
 
@@ -415,10 +369,10 @@
         // Check answer
         function checkAnswer() {
             const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
-            const correctAnswer = riddles[currentRiddle].answer.toLowerCase();
+            const correctAnswers = riddles[currentRiddle].answers.map(a => a.toLowerCase());
             const feedback = document.getElementById('feedback');
 
-            if (userAnswer === correctAnswer) {
+            if (correctAnswers.includes(userAnswer)) {
                 feedback.textContent = '🎉 Correct! Well done!';
                 feedback.className = 'feedback success';
 
@@ -443,7 +397,6 @@
         function markAsSolved(riddleNum) {
             const card = document.querySelector(`.riddle-card[data-riddle="${riddleNum}"]`);
             card.classList.add('solved');
-            card.querySelector('.riddle-status').textContent = '✓ Solved!';
         }
 
         // Update QR image based on progress
