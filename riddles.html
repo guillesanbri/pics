@@ -161,6 +161,19 @@
             font-style: italic;
         }
 
+        .riddle-image {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .riddle-image.visible {
+            display: block;
+        }
+
         .answer-input {
             width: 100%;
             padding: 15px;
@@ -281,6 +294,7 @@
         <div class="modal-content">
             <div class="modal-header" id="modalHeader">Acertijo #1</div>
             <div class="riddle-text" id="riddleText"></div>
+            <img id="riddleImage" class="riddle-image" alt="Imagen del acertijo">
             <input type="text" class="answer-input" id="answerInput" placeholder="Escribe tu respuesta aquí...">
             <div class="button-group">
                 <button class="btn btn-submit" onclick="checkAnswer()">Enviar</button>
@@ -291,19 +305,20 @@
     </div>
 
     <script>
-        // Riddles and their answers (case-insensitive)
+        // Acertijos y sus respuestas (no distingue mayúsculas)
+        // Puede tener 'text' para texto o 'image' para imagen
         const riddles = {
             1: {
                 text: "Hablo sin boca y oigo sin orejas. No tengo cuerpo, pero cobro vida con el viento. ¿Qué soy?",
                 answers: ["eco", "el eco"]
             },
             2: {
-                text: "Cuanto más tomas, más dejas atrás. ¿Qué soy?",
-                answers: ["pasos", "huellas", "pisadas"]
+                image: "images/bambola.png",
+                answers: ["bambola"]
             },
             3: {
-                text: "Tengo teclas pero no cerraduras. Tengo espacio pero no habitación. Puedes entrar pero no salir. ¿Qué soy?",
-                answers: ["teclado", "el teclado"]
+                image: "images/masa.png",
+                answers: ["masa madre", "magdalena"]
             },
             4: {
                 text: "¿Qué tiene manos pero no puede aplaudir?",
@@ -352,7 +367,24 @@
 
             currentRiddle = riddleNum;
             document.getElementById('modalHeader').textContent = 'Acertijo #' + riddleNum;
-            document.getElementById('riddleText').textContent = riddles[riddleNum].text;
+
+            const riddle = riddles[riddleNum];
+            const riddleTextEl = document.getElementById('riddleText');
+            const riddleImageEl = document.getElementById('riddleImage');
+
+            // Check if it's an image or text riddle
+            if (riddle.image) {
+                riddleTextEl.textContent = '';
+                riddleTextEl.style.display = 'none';
+                riddleImageEl.src = riddle.image;
+                riddleImageEl.classList.add('visible');
+            } else {
+                riddleTextEl.textContent = riddle.text;
+                riddleTextEl.style.display = 'block';
+                riddleImageEl.classList.remove('visible');
+                riddleImageEl.src = '';
+            }
+
             document.getElementById('answerInput').value = '';
             document.getElementById('feedback').className = 'feedback';
             document.getElementById('riddleModal').classList.add('active');
