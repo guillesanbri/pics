@@ -310,7 +310,7 @@
         const riddles = {
             1: {
                 text: "Atravieso la ciudad, subiendo y bajando. ¿Quién soy?",
-                answers: ["pisuerga", "río pisuerga", "el río pisuerga", "el pisuerga", "el rio pisuerga"]
+                answers: ["pisuerga", "río pisuerga", "rio pisuerga", "el río pisuerga", "el pisuerga", "el rio pisuerga"]
             },
             2: {
                 image: "images/bambola.png",
@@ -410,13 +410,16 @@
                 // Store in cookie
                 setCookie('riddle' + currentRiddle, 'solved');
 
-                // Mark as solved and update progress
+                // Mark as solved (but don't update QR yet)
                 markAsSolved(currentRiddle);
-                updateProgress();
 
                 // Close modal after a short delay
                 setTimeout(() => {
                     closeModal();
+                    // Update QR image 1 second after modal closes
+                    setTimeout(() => {
+                        updateProgress();
+                    }, 600);
                 }, 1500);
             } else {
                 feedback.textContent = '❌ Nop, intentalo otra vez!';
